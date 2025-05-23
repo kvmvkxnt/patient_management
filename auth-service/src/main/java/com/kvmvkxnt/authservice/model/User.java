@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,10 +20,13 @@ public class User {
   private String email;
 
   @Column(nullable = false)
+  private String username;
+
+  @Column(nullable = false)
   private String password;
 
   @Column(nullable = false)
-  private String role;
+  private List<Role> roles;
 
   public UUID getId() {
     return id;
@@ -40,6 +44,14 @@ public class User {
     this.email = email;
   }
 
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
   public String getPassword() {
     return password;
   }
@@ -48,11 +60,11 @@ public class User {
     this.password = password;
   }
 
-  public String getRole() {
-    return role;
+  public List<Role> getRoles() {
+    return roles;
   }
 
-  public void setRole(String role) {
-    this.role = role;
+  public void setRole(List<Role> roles) {
+    this.roles = roles;
   }
 }

@@ -15,6 +15,9 @@ public class PatientRequestDTO {
   @Email(message = "Email should be valid")
   private String email;
 
+  @NotBlank(message = "Username is mandatory")
+  private String username;
+
   @NotBlank(message = "Address is mandatory")
   private String address;
 
@@ -23,6 +26,14 @@ public class PatientRequestDTO {
 
   @NotBlank(groups = CreatePatientValidationGroup.class, message = "Registered date is mandatory")
   private String registeredDate;
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
   public String getName() {
     return name;

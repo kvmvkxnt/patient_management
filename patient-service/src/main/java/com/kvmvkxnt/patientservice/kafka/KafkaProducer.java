@@ -1,7 +1,6 @@
 package com.kvmvkxnt.patientservice.kafka;
 
 import com.kvmvkxnt.patientservice.model.Patient;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -23,10 +22,11 @@ public class KafkaProducer {
             .setPatientId(patient.getId().toString())
             .setName(patient.getName())
             .setEmail(patient.getEmail())
+            .setUsername(patient.getUsername())
             .setEventType("PATIENT_CREATED")
             .build();
     try {
-      kafkaTemplate.send("patient", event.toByteArray());
+      kafkaTemplate.send("patient.request", event.toByteArray());
     } catch (Exception e) {
       log.error("Error sending PatientCreated event: {}", event);
     }

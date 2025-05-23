@@ -1,4 +1,4 @@
-package com.kvmvkxnt.analyticsservice.kafka;
+package com.kvmvkxnt.authservice.kafka;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import org.slf4j.Logger;
@@ -9,9 +9,10 @@ import patient.events.PatientEvent;
 
 @Service
 public class KafkaConsumer {
+
   private static final Logger log = LoggerFactory.getLogger(KafkaConsumer.class);
 
-  @KafkaListener(topics = "patient.request", groupId = "analytics-service")
+  @KafkaListener(topics = "patient.request", groupId = "auth-service")
   public void consumeEvent(byte[] event) {
     try {
       PatientEvent patientEvent = PatientEvent.parseFrom(event);
@@ -22,6 +23,7 @@ public class KafkaConsumer {
           patientEvent.getName(),
           patientEvent.getUsername(),
           patientEvent.getEmail());
+
     } catch (InvalidProtocolBufferException e) {
       log.error("Error deserializing PatientEvent: {}", e.getMessage());
     }

@@ -4,6 +4,7 @@ public class PatientResponseDTO {
 
   private String id;
   private String name;
+  private String username;
   private String email;
   private String address;
   private String dateOfBirth;
@@ -46,5 +47,13 @@ public class PatientResponseDTO {
 
   public void setDateOfBirth(String dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
   }
 }

@@ -1,5 +1,6 @@
 package com.kvmvkxnt.authservice.util;
 
+import com.kvmvkxnt.authservice.model.Role;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -8,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -22,10 +24,10 @@ public class JwtUtil {
     this.secretKey = Keys.hmacShaKeyFor(keyBytes);
   }
 
-  public String generateToken(String email, String role) {
+  public String generateToken(String username, List<Role> roles) {
     return Jwts.builder()
-        .subject(email)
-        .claim("role", role)
+        .subject(username)
+        .claim("role", roles)
         .issuedAt(new Date())
         .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
         .signWith(secretKey)
